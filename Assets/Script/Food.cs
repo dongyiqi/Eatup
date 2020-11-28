@@ -50,6 +50,7 @@ public class Food : MonoBehaviour
             if (position.y < -500)
             {
                 _state = State.OnGround;
+                GameLogic.Instance.DropFoodCount++;
                 GameObject.Destroy(gameObject, 0.5f);
                 //TODO:play destroy praticle
             }
