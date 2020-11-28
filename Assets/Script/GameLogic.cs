@@ -17,12 +17,14 @@ public class GameLogic : MonoBehaviour
     public GameObject FoodPrefab;
     public GameObject StartPrefab;
     public Transform TimeProgress;
-
+    public Text txtTime;
+    
     public float GameTime = 60;
     
     private float _GameTimeLeft;
     public bool GamePlaying;
-
+    public Color[] TimeColorArray;
+    
     public Vector2 SpawnRateRange = new Vector2(5, 1);
     public float SpawnRandomRate = 0.3f;
 
@@ -74,6 +76,21 @@ public class GameLogic : MonoBehaviour
             _GameTimeLeft -= deltaTime;
             var rate = _GameTimeLeft / GameTime;
             TimeProgress.localScale = new Vector3(rate, 1, 1);
+            txtTime.text = ((int) _GameTimeLeft).ToString();
+            
+            if (rate > 0.5f)
+            {
+                TimeProgress.GetComponent<Image>().color = TimeColorArray[0];
+            }
+            else if (rate > 0.2f)
+            {
+                TimeProgress.GetComponent<Image>().color = TimeColorArray[1];
+            }
+            else
+            {
+                TimeProgress.GetComponent<Image>().color = TimeColorArray[2];
+            }
+
             PlayerController.Instance.Tick(deltaTime);
             if (_GameTimeLeft <= 0)
             {
@@ -88,9 +105,9 @@ public class GameLogic : MonoBehaviour
                 if(elapsedTime > StartShowTime[i] && elapsedTime-deltaTime < StartShowTime[i])
                     SpawnStar();
             }
-        }
 
-        
+            
+        }
     }
 
     private void _TickSpawn(float deltaTime)
