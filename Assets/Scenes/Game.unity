@@ -796,11 +796,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1fb6f66d1070d294aaa44b1d4aed6d51, type: 3}
   - {fileID: 21300000, guid: 723c59b6855ab0148a32a012b2001387, type: 3}
   - {fileID: 21300000, guid: 3f700b5be0642144fbae3e017a27f882, type: 3}
-  - {fileID: 21300000, guid: 3cf561a1654234944b55ac8d38078fd0, type: 3}
-  - {fileID: 21300000, guid: 9ff7ca5d0c3b44548ab521b372a97d57, type: 3}
-  - {fileID: 21300000, guid: 43f5535877ad7244daa69d4a28a33f76, type: 3}
-  - {fileID: 21300000, guid: c4e0a668506949949914284da59ba5a9, type: 3}
-  - {fileID: 21300000, guid: 8c104ce55436aac40a5c5998b2f4cc3e, type: 3}
   FoodPrefab: {fileID: 1705586794877018313, guid: c071806a2794ea647a873b849033c1b6,
     type: 3}
   StartPrefab: {fileID: 6171983236741376643, guid: 2f6188c4331e89e49a6b8a62dc2e5893,
