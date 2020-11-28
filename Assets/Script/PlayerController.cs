@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Sprite[] EatSprites;
     private RectTransform _transform;
     private Image _image;
+
     private void Awake()
     {
         Instance = this;
@@ -34,12 +35,14 @@ public class PlayerController : MonoBehaviour
     public void Tick(float deltaTime)
     {
         Position = _transform.anchoredPosition;
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) ||
+            (Input.GetMouseButton(0) && Input.mousePosition.x < 0.5f * Screen.width))
         {
             Position.x -= Time.deltaTime * Speed;
         }
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) ||
+            (Input.GetMouseButton(0) && Input.mousePosition.x > 0.5f * Screen.width))
         {
             Position.x += Time.deltaTime * Speed;
         }
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool _eating;
+
     public void TryToEat()
     {
         if (!_eating)
@@ -65,7 +69,7 @@ public class PlayerController : MonoBehaviour
         _image.sprite = EatSprites[1];
         yield return new WaitForSeconds(0.25f);
         _image.sprite = EatSprites[0];
-        
+
         _eating = false;
-    } 
+    }
 }

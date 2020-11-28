@@ -15,24 +15,28 @@ public class GameLogic : MonoBehaviour
     public Transform Root;
     public Sprite[] FoodSprites;
     public GameObject FoodPrefab;
+    public GameObject StartPrefab;
     public Transform TimeProgress;
 
     public float GameTime = 60;
-
+    
     private float _GameTimeLeft;
     public bool GamePlaying;
 
-    private Vector2 SpawnRateRange = new Vector2(5, 1);
+    public Vector2 SpawnRateRange = new Vector2(5, 1);
     public float SpawnRandomRate = 0.3f;
 
     private float _lastSpawnElapsedTime;
     private float _nextSpawnTime;
 
+
+    public List<float> StartShowTime; 
     private void Awake()
     {
         Application.targetFrameRate = 60;
         Instance = this;
         _GameTimeLeft = GameTime;
+        Food.FoodList.Clear();
     }
 
     private void OnDestroy()
@@ -77,7 +81,16 @@ public class GameLogic : MonoBehaviour
             }
 
             _TickSpawn(deltaTime);
+            //tick spawn start
+            var elapsedTime = GameTime - _GameTimeLeft;
+            for (int i = 0; i < StartShowTime.Count; i++)
+            {
+                if(elapsedTime > StartShowTime[i] && elapsedTime-deltaTime < StartShowTime[i])
+                    SpawnStar();
+            }
         }
+
+        
     }
 
     private void _TickSpawn(float deltaTime)
@@ -101,6 +114,16 @@ public class GameLogic : MonoBehaviour
         var go = GameObject.Instantiate(FoodPrefab);
         go.transform.SetParent(Root);
         go.GetComponentInChildren<Image>().sprite = FoodSprites[Random.Range(0, FoodSprites.Length)];
+        ((RectTransform) go.transform).anchoredPosition = new Vector2(randomX, y);
+    }
+    
+    private void SpawnStar()
+    {
+        var randomX = Random.Range(-0.5f * GameDefination.HorizontalRange + GameDefination.Border,
+            0.5f * GameDefination.HorizontalRange - GameDefination.Border);
+        var y = 600;
+        var go = GameObject.Instantiate(StartPrefab);
+        go.transform.SetParent(Root);
         ((RectTransform) go.transform).anchoredPosition = new Vector2(randomX, y);
     }
 }
