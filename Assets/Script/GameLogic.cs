@@ -31,7 +31,8 @@ public class GameLogic : MonoBehaviour
     private float _lastSpawnElapsedTime;
     private float _nextSpawnTime;
 
-
+    public AudioSource background;
+    
     public List<float> StartShowTime; 
     private void Awake()
     {
@@ -65,6 +66,7 @@ public class GameLogic : MonoBehaviour
     {
         GamePlaying = false;
         GameObject.Instantiate(EndMenu);
+        background.Stop();
     }
 
     // Update is called once per frame

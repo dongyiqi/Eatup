@@ -87,4 +87,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: {fileID: 4809202107324064408, guid: b58b5a2fcc5dc404a9896793c21d236a, type: 3}
-  SpeedRange: {x: 100, y: 200}
+  SpeedRange: {x: 150, y: 230}
